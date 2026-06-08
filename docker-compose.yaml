@@ -1,0 +1,23 @@
+services:
+  mysql:
+    image: manikanta65docker/mysql:1.0.0
+    build: ./database
+    container_name: mysql
+  node-app:
+    image: manikanta65docker/backend:1.0.0
+    build: ./backend
+    container_name: node-app
+    depends_on:
+      - mysql
+  frontend:
+    image: manikanta65docker/frontend:1.0.0
+    build: ./frontend
+    container_name: frontend
+    depends_on:
+      - node-app   
+
+networks:
+  default:
+    driver: bridge
+    name: roboshop
+    external: false  
